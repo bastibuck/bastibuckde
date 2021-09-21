@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 import styles from "../styles/Home.module.css";
@@ -73,6 +74,16 @@ const Home: NextPage = () => {
           </a>
         </div>
       </section>
+
+      <footer className={styles.footer}>
+        <Link href="/impressum">
+          <a>Impressum</a>
+        </Link>
+
+        <Link href="/datenschutz">
+          <a>Datenschutz</a>
+        </Link>
+      </footer>
     </div>
   );
 };

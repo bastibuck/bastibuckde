@@ -13,9 +13,13 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: #354046;
   color: #f0f0f0;
+}
+
+.centeredBox {
+  max-width: 65ch;
 }
 
 .light {
@@ -32,6 +36,10 @@
 .title,
 .description {
   text-align: center;
+}
+
+.left {
+  text-align: left !important;
 }
 
 .description {
@@ -80,4 +88,19 @@
     width: 100%;
     grid-template-columns: 1fr;
   }
+}
+
+.back {
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.footer {
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  background: #354046;
+  color: #f0f0f0;
+  gap: 2rem;
 }
