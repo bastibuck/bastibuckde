@@ -1,9 +1,34 @@
+import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
+  const [counter, setCounter] = useState(0);
+
+  const typewriterWords = [
+    "Web-/Softwareentwickler",
+    "Outdoor-Enthusiast",
+    "Hobbykoch",
+    "Alles-Ausprobierer",
+    "",
+  ];
+
+  const { text, count } = useTypewriter({
+    words: typewriterWords,
+    loop: false,
+    deleteSpeed: counter % typewriterWords.length === 0 ? 35 : 20,
+    delaySpeed: counter % typewriterWords.length === 0 ? 4000 : 1400,
+  });
+
+  useEffect(() => {
+    setCounter(count);
+
+    return;
+  }, [count]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,12 +39,15 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      <main className={styles.main}>
+      <section className={styles.section}>
         <h1 className={styles.title}>Basti Buck</h1>
-        <h2>Moin</h2>
+        <h2 className={styles.description}>
+          <span>{text}</span>
+          <Cursor cursorStyle="_" />
+        </h2>
+      </section>
 
-        <p className={styles.description}>Web-/Softwareentwickler</p>
-
+      <section className={`${styles.section} ${styles.light}`}>
         <div className={styles.grid}>
           <a href="https://github.com/bastibuck" className={styles.card}>
             <h2>GitHub &rarr;</h2>
@@ -44,7 +72,7 @@ const Home: NextPage = () => {
             <p>Business oder so</p>
           </a>
         </div>
-      </main>
+      </section>
     </div>
   );
 };
