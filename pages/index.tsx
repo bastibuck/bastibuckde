@@ -11,8 +11,9 @@ const Home: NextPage = () => {
 
   const typewriterWords = [
     "Web-/Softwareentwickler",
-    "Outdoor-Enthusiast",
+    "Kursleiter",
     "Hobbykoch",
+    "Outdoor-Enthusiast",
     "Alles-Ausprobierer",
     "",
   ];
