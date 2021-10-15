@@ -41,8 +41,8 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      <section className={styles.section}>
-        <h1 className={styles.title}>Basti Buck</h1>
+      <section className={`${styles.section} ${styles.intro}`}>
+        <h1 className={`${styles.title} ${styles.respTitle}`}>Basti Buck</h1>
         <h2 className={styles.description}>
           <span>{text}</span>
           <Cursor cursorStyle="_" />
