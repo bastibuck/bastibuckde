@@ -21,7 +21,7 @@ const Datenschutz: NextPage = () => {
             <a className={styles.back}>&larr; zurück</a>
           </Link>
 
-          <h1 className={styles.title}>Datenschutzerklärung</h1>
+          <h1 className={styles.title}>Daten&shy;schutz&shy;erklärung</h1>
 
           <h3>Datenschutz</h3>
 
