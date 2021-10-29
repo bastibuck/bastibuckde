@@ -3,7 +3,6 @@ body {
   padding: 0;
   margin: 0;
   font-family: Roboto;
-  font-weight: 100;
 }
 
 a {
@@ -13,4 +12,5 @@ a {
 
 * {
   box-sizing: border-box;
+  font-weight: 100 !important;
 }

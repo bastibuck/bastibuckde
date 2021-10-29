@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 import styles from "../styles/Home.module.css";
+import basti from "../assets/bastibuck.jpg";
 
 const Home: NextPage = () => {
   const [counter, setCounter] = useState(0);
@@ -42,6 +44,15 @@ const Home: NextPage = () => {
       </Head>
 
       <section className={`${styles.section} ${styles.intro}`}>
+        <div className={styles.portraitWrapper}>
+          <Image
+            src={basti}
+            alt="Portraitfoto Basti Buck"
+            layout="fill"
+            objectFit="cover"
+            placeholder="blur"
+          />
+        </div>
         <h1 className={`${styles.title} ${styles.respTitle}`}>Basti Buck</h1>
         <h2 className={styles.description}>
           <span>{text}</span>

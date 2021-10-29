@@ -34,7 +34,7 @@
 }
 
 .respTitle {
-  font-size: clamp(1em, 10vw, 120px);
+  font-size: clamp(1em, 10vw, 70px);
 }
 
 .title,
@@ -142,4 +142,13 @@
     opacity: 0;
     transform: translateY(-20px) rotate(90deg);
   }
+}
+
+.portraitWrapper {
+  position: relative;
+  width: clamp(250px, 50vw, 400px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 2rem;
 }
