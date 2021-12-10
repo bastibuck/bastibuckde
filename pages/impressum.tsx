@@ -2,11 +2,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import styles from "../styles/Home.module.css";
-
 const Impressum: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Basti Buck</title>
         <meta
@@ -15,13 +13,13 @@ const Impressum: NextPage = () => {
         />
       </Head>
 
-      <section className={`${styles.section} ${styles.left}`}>
-        <div className={styles.centeredBox}>
+      <section>
+        <div>
           <Link href="/">
-            <a className={styles.back}>&larr; zurück</a>
+            <a>&larr; zurück</a>
           </Link>
 
-          <h1 className={styles.title}>Impressum</h1>
+          <h1>Impressum</h1>
 
           <h3>Angaben gemäß § 5 TMG:</h3>
 
@@ -59,8 +57,8 @@ const Impressum: NextPage = () => {
         </div>
       </section>
 
-      <section className={`${styles.section} ${styles.light}`}>
-        <div className={styles.centeredBox}>
+      <section>
+        <div>
           <h3>Haftungsausschluss (Disclaimer)</h3>
           <p>
             <strong>Haftung für Inhalte</strong>

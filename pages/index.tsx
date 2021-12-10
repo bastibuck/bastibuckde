@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import Image from "next/image";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 
-import styles from "../styles/Home.module.css";
 import basti from "../assets/bastibuck.jpg";
 
 const Home: NextPage = () => {
@@ -34,7 +32,7 @@ const Home: NextPage = () => {
   }, [count]);
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Basti Buck</title>
         <meta
@@ -43,8 +41,8 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      <section className={`${styles.section} ${styles.intro}`}>
-        <div className={styles.portraitWrapper}>
+      <section>
+        <div style={{ width: 300, aspectRatio: "1", position: "relative" }}>
           <Image
             src={basti}
             alt="Portraitfoto Basti Buck"
@@ -53,49 +51,12 @@ const Home: NextPage = () => {
             placeholder="blur"
           />
         </div>
-        <h1 className={`${styles.title} ${styles.respTitle}`}>Basti Buck</h1>
-        <h2 className={styles.description}>
+        <h1>Basti Buck</h1>
+        <h2>
           <span>{text}</span>
           <Cursor cursorStyle="_" />
         </h2>
       </section>
-
-      <section className={`${styles.section} ${styles.light}`}>
-        <div className={styles.grid}>
-          <a href="https://github.com/bastibuck" className={styles.card}>
-            <h2>GitHub &rarr;</h2>
-            <p>Ein Haufen Side-Projects</p>
-          </a>
-
-          <a href="mailto:mail@bastibuck.de" className={styles.card}>
-            <h2>E-Mail &rarr;</h2>
-            <p>The old fashioned way</p>
-          </a>
-
-          <a href="https://twitter.com/bastibuck" className={styles.card}>
-            <h2>Twitter &rarr;</h2>
-            <p>Chirp chirp</p>
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/bastibuck"
-            className={styles.card}
-          >
-            <h2>LinkedIn &rarr;</h2>
-            <p>Business oder so</p>
-          </a>
-        </div>
-      </section>
-
-      <footer className={styles.footer}>
-        <Link href="/impressum">
-          <a>Impressum</a>
-        </Link>
-
-        <Link href="/datenschutz">
-          <a>Datenschutz</a>
-        </Link>
-      </footer>
     </div>
   );
 };

@@ -2,11 +2,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import styles from "../styles/Home.module.css";
-
 const Datenschutz: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Basti Buck</title>
         <meta
@@ -15,13 +13,13 @@ const Datenschutz: NextPage = () => {
         />
       </Head>
 
-      <section className={`${styles.section} ${styles.left}`}>
-        <div className={styles.centeredBox}>
+      <section>
+        <div>
           <Link href="/">
-            <a className={styles.back}>&larr; zurück</a>
+            <a>&larr; zurück</a>
           </Link>
 
-          <h1 className={styles.title}>Daten&shy;schutz&shy;erklärung</h1>
+          <h1>Daten&shy;schutz&shy;erklärung</h1>
 
           <h3>Datenschutz</h3>
 
