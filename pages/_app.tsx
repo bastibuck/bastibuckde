@@ -58,7 +58,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               )}
 
               <Switch
-                label="Dark mode"
+                label={<div>Dark mode</div>}
                 onChange={toggleColorScheme}
                 checked={colorScheme === "dark"}
               />
@@ -66,26 +66,25 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Header>
         }
       >
-        <Center sx={{ height: "100%" }}>
-          <Component {...pageProps} />
-        </Center>
+        <Component {...pageProps} />
+
+        <Container
+          fluid
+          padding={0}
+          sx={(theme) => ({
+            padding: theme.spacing.xl,
+          })}
+        >
+          <Group position="right">
+            <Link href="/datenschutz" passHref>
+              <Anchor>Datenschutz</Anchor>
+            </Link>
+            <Link href="/impressum" passHref>
+              <Anchor>Impressum</Anchor>
+            </Link>
+          </Group>
+        </Container>
       </AppShell>
-      <Container
-        fluid
-        padding={0}
-        sx={(theme) => ({
-          margin: theme.spacing.xl,
-        })}
-      >
-        <Group position="right">
-          <Link href="/datenschutz" passHref>
-            <Anchor>Datenschutz</Anchor>
-          </Link>
-          <Link href="/impressum" passHref>
-            <Anchor>Impressum</Anchor>
-          </Link>
-        </Group>
-      </Container>
     </MantineProvider>
   );
 }
