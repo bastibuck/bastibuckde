@@ -100,7 +100,7 @@ const Home: NextPage = () => {
             Lebenslauf
           </Title>
 
-          <Timeline active={8} bulletSize={24} lineWidth={2}>
+          <Timeline active={9} bulletSize={24} lineWidth={2}>
             <Timeline.Item title="git switch -c basti/buck">
               <Text color="dimmed" size="sm">
                 Geburt
@@ -109,7 +109,6 @@ const Home: NextPage = () => {
                 15.12.1989
               </Text>
             </Timeline.Item>
-
             <Timeline.Item title="git rebase feature/abitur">
               <Text color="dimmed" size="sm">
                 Hans-Geiger-Gymnasium, Kiel
@@ -118,7 +117,6 @@ const Home: NextPage = () => {
                 2009
               </Text>
             </Timeline.Item>
-
             <Timeline.Item title="git rebase feature/zivi">
               <Text color="dimmed" size="sm">
                 Zivildienst, <br />
@@ -128,7 +126,6 @@ const Home: NextPage = () => {
                 2009 - 2010
               </Text>
             </Timeline.Item>
-
             <Timeline.Item title="git rebase feature/bachelor">
               <Text color="dimmed" size="sm">
                 B.A. Multimedia Production <br />
@@ -138,7 +135,6 @@ const Home: NextPage = () => {
                 2010 - 2014
               </Text>
             </Timeline.Item>
-
             <Timeline.Item title="git rebase feature/pixel-panda">
               <Text color="dimmed" size="sm">
                 Co-Selbstständigkeit <br />
@@ -148,7 +144,6 @@ const Home: NextPage = () => {
                 2012 - 2014
               </Text>
             </Timeline.Item>
-
             <Timeline.Item title="git rebase feature/master">
               <Text color="dimmed" size="sm">
                 M.A. Medienkonzeption <br />
@@ -158,7 +153,6 @@ const Home: NextPage = () => {
                 2014 - 2017
               </Text>
             </Timeline.Item>
-
             <Timeline.Item title="git rebase feature/buck-medien">
               <Text color="dimmed" size="sm">
                 Solo-Selbstständigkeit <br />
@@ -168,7 +162,6 @@ const Home: NextPage = () => {
                 2014 - heute
               </Text>
             </Timeline.Item>
-
             <Timeline.Item title="git rebase feature/ppi-media">
               <Text color="dimmed" size="sm">
                 Softwareentwickler ppi Media GmbH
@@ -177,11 +170,7 @@ const Home: NextPage = () => {
                 2018 - 2019
               </Text>
             </Timeline.Item>
-
-            <Timeline.Item
-              title="git rebase feature/weluse"
-              lineVariant="dashed"
-            >
+            <Timeline.Item title="git rebase feature/weluse">
               <Text color="dimmed" size="sm">
                 Softwareentwickler weluse GmbH
               </Text>
@@ -190,6 +179,18 @@ const Home: NextPage = () => {
               </Text>
             </Timeline.Item>
 
+            <Timeline.Item
+              title="git rebase feature/webprojekt"
+              lineVariant="dashed"
+            >
+              <Text color="dimmed" size="sm">
+                Kursleitung, <br />
+                opencampus
+              </Text>
+              <Text size="xs" style={{ marginTop: 4 }}>
+                2020 - heute
+              </Text>
+            </Timeline.Item>
             <Timeline.Item title="git switch -c feature/future">
               <Text color="dimmed" size="sm">
                 Softwareentwickler ???
