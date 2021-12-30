@@ -8,13 +8,21 @@ import {
   Group,
   AppShell,
   Center,
+  Container,
+  Anchor,
+  Title,
 } from "@mantine/core";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [colorScheme, setColorScheme] = useState<"dark" | "light">("dark");
+  const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
 
-  const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+  const toggleColorScheme = () =>
+    setColorScheme(colorScheme === "dark" ? "light" : "dark");
+
+  const router = useRouter();
+  const isHomeRoute = router.route === "/";
 
   return (
     <MantineProvider
@@ -35,20 +43,23 @@ function MyApp({ Component, pageProps }: AppProps) {
         padding={0}
         fixed
         header={
-          <Header
-            height={50}
-            sx={{ border: "none", background: "transparent" }}
-          >
+          <Header height={50} sx={{ border: "none" }}>
             <Group
-              position="right"
+              position={isHomeRoute ? "right" : "apart"}
               sx={(theme) => ({
                 height: "100%",
                 marginInline: theme.spacing.md,
               })}
             >
+              {isHomeRoute ? null : (
+                <Title sx={(theme) => ({ fontSize: theme.fontSizes.xl })}>
+                  Basti Buck
+                </Title>
+              )}
+
               <Switch
                 label="Dark mode"
-                onChange={() => toggleColorScheme()}
+                onChange={toggleColorScheme}
                 checked={colorScheme === "dark"}
               />
             </Group>
@@ -59,6 +70,22 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </Center>
       </AppShell>
+      <Container
+        fluid
+        padding={0}
+        sx={(theme) => ({
+          margin: theme.spacing.xl,
+        })}
+      >
+        <Group position="right">
+          <Link href="/datenschutz" passHref>
+            <Anchor>Datenschutz</Anchor>
+          </Link>
+          <Link href="/impressum" passHref>
+            <Anchor>Impressum</Anchor>
+          </Link>
+        </Group>
+      </Container>
     </MantineProvider>
   );
 }

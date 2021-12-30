@@ -1,3 +1,5 @@
+import React from "react";
+import { Anchor, Container } from "@mantine/core";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -6,17 +8,14 @@ const Datenschutz: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Basti Buck</title>
-        <meta
-          name="description"
-          content="Basti Buck ist Web-/Softwareentwickler aus Kiel"
-        />
+        <title>Datenschutz | Basti Buck</title>
+        <meta name="description" content="Datenschutzerklärung" />
       </Head>
 
-      <section>
+      <Container>
         <div>
-          <Link href="/">
-            <a>&larr; zurück</a>
+          <Link href="/" passHref>
+            <Anchor>&larr; zurück</Anchor>
           </Link>
 
           <h1>Daten&shy;schutz&shy;erklärung</h1>
@@ -74,7 +73,7 @@ const Datenschutz: NextPage = () => {
             Nutzung bekannt werden.
           </p>
         </div>
-      </section>
+      </Container>
     </div>
   );
 };

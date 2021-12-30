@@ -1,3 +1,5 @@
+import React from "react";
+import { Anchor, Container } from "@mantine/core";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -6,17 +8,14 @@ const Impressum: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Basti Buck</title>
-        <meta
-          name="description"
-          content="Basti Buck ist Web-/Softwareentwickler aus Kiel"
-        />
+        <title>Impressum | Basti Buck</title>
+        <meta name="description" content="Impressum" />
       </Head>
 
-      <section>
+      <Container>
         <div>
-          <Link href="/">
-            <a>&larr; zurück</a>
+          <Link href="/" passHref>
+            <Anchor>&larr; zurück</Anchor>
           </Link>
 
           <h1>Impressum</h1>
@@ -45,19 +44,20 @@ const Impressum: NextPage = () => {
           <p>
             Quelle:{" "}
             <em>
-              <a
+              <Link
                 href="https://www.e-recht24.de/artikel/datenschutz/209.html"
-                target="_blank"
-                rel="noopener noreferrer"
+                passHref
               >
-                https://www.e-recht24.de
-              </a>
+                <Anchor target="_blank" rel="noopener noreferrer">
+                  https://www.e-recht24.de
+                </Anchor>
+              </Link>
             </em>
           </p>
         </div>
-      </section>
+      </Container>
 
-      <section>
+      <Container>
         <div>
           <h3>Haftungsausschluss (Disclaimer)</h3>
           <p>
@@ -119,7 +119,7 @@ const Impressum: NextPage = () => {
             Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
           </p>
         </div>
-      </section>
+      </Container>
     </div>
   );
 };
