@@ -7,13 +7,13 @@ import {
   Switch,
   Group,
   AppShell,
-  Center,
   Container,
   Anchor,
   Title,
 } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Bulb from "../components/icons/Bulb";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
@@ -58,7 +58,8 @@ function MyApp({ Component, pageProps }: AppProps) {
               )}
 
               <Switch
-                label={<div>Dark mode</div>}
+                aria-label="dark mode"
+                label={<Bulb on={colorScheme === "light"} />}
                 onChange={toggleColorScheme}
                 checked={colorScheme === "dark"}
               />
