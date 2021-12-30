@@ -5,10 +5,20 @@ import Image from "next/image";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 import basti from "../assets/bastibuck.jpg";
-import { Center, Container, Timeline, Title, Text } from "@mantine/core";
+import {
+  Center,
+  Container,
+  Timeline,
+  Title,
+  Text,
+  Collapse,
+  Button,
+} from "@mantine/core";
 
 const Home: NextPage = () => {
   const [counter, setCounter] = useState(0);
+
+  const [bachelorOpened, setBachelorOpened] = useState(false);
 
   const typewriterWords = [
     "Web-/Softwareentwickler",
@@ -134,6 +144,27 @@ const Home: NextPage = () => {
               <Text size="xs" style={{ marginTop: 4 }}>
                 2010 - 2014
               </Text>
+
+              <Button
+                variant="outline"
+                radius="xs"
+                size="xs"
+                compact
+                onClick={() => setBachelorOpened((open) => !open)}
+              >
+                Mehr...
+              </Button>
+
+              <Collapse
+                in={bachelorOpened}
+                sx={(theme) => ({ marginBlock: theme.spacing.sm })}
+              >
+                Abschlussarbeit:{" "}
+                <strong>
+                  Modulentwicklung für das CMS Contao - Eine Anwesenheitsliste
+                  für Kalender-Events
+                </strong>
+              </Collapse>
             </Timeline.Item>
             <Timeline.Item title="git rebase feature/pixel-panda">
               <Text color="dimmed" size="sm">
