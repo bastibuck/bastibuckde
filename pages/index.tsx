@@ -1,47 +1,22 @@
-import React, { useEffect, useState } from "react";
-import type { NextPage } from "next";
+import React from "react";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 import basti from "../assets/bastibuck.jpg";
-import {
-  Center,
-  Container,
-  Timeline,
-  Title,
-  Text,
-  Collapse,
-  Button,
-} from "@mantine/core";
+import { Center, Container, Title } from "@mantine/core";
+import { cvQuery, CVResult } from "../queries/cv";
+import { client } from "../queries/client";
 
-const Home: NextPage = () => {
-  const [counter, setCounter] = useState(0);
+import TypeWriter from "../components/TypeWriter";
+import TimeLine from "../components/TimeLine";
+import { optionsQuery, OptionsResult } from "../queries/options";
 
-  const [bachelorOpened, setBachelorOpened] = useState(false);
-
-  const typewriterWords = [
-    "Web-/Softwareentwickler",
-    "Kursleiter",
-    "Hobbykoch",
-    "Outdoor-Enthusiast",
-    "Alles-Ausprobierer",
-    "",
-  ];
-
-  const { text, count } = useTypewriter({
-    words: typewriterWords,
-    loop: false,
-    deleteSpeed: counter % typewriterWords.length === 0 ? 35 : 20,
-    delaySpeed: counter % typewriterWords.length === 0 ? 4000 : 1400,
-  });
-
-  useEffect(() => {
-    setCounter(count);
-
-    return;
-  }, [count]);
-
+const Home = ({
+  cv,
+  options,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  console.log("🚀 ~ file: index.tsx ~ line 19 ~ options", options);
   return (
     <>
       <Head>
@@ -89,8 +64,7 @@ const Home: NextPage = () => {
               whiteSpace: "normal",
             })}
           >
-            <span>{text}</span>
-            <Cursor cursorStyle="_" />
+            <TypeWriter words={options?.typewriterWords ?? []} />
           </Title>
         </Container>
       </Center>
@@ -110,127 +84,7 @@ const Home: NextPage = () => {
             Lebenslauf
           </Title>
 
-          <Timeline active={9} bulletSize={24} lineWidth={2}>
-            <Timeline.Item title="git switch -c basti/buck">
-              <Text color="dimmed" size="sm">
-                Geburt
-              </Text>
-              <Text size="xs" style={{ marginTop: 4 }}>
-                15.12.1989
-              </Text>
-            </Timeline.Item>
-            <Timeline.Item title="git rebase feature/abitur">
-              <Text color="dimmed" size="sm">
-                Hans-Geiger-Gymnasium, Kiel
-              </Text>
-              <Text size="xs" style={{ marginTop: 4 }}>
-                2009
-              </Text>
-            </Timeline.Item>
-            <Timeline.Item title="git rebase feature/zivi">
-              <Text color="dimmed" size="sm">
-                Zivildienst, <br />
-                Jugendtreff Kiste
-              </Text>
-              <Text size="xs" style={{ marginTop: 4 }}>
-                2009 - 2010
-              </Text>
-            </Timeline.Item>
-            <Timeline.Item title="git rebase feature/bachelor">
-              <Text color="dimmed" size="sm">
-                B.A. Multimedia Production <br />
-                FH Kiel
-              </Text>
-              <Text size="xs" style={{ marginTop: 4 }}>
-                2010 - 2014
-              </Text>
-
-              <Button
-                variant="outline"
-                radius="xs"
-                size="xs"
-                compact
-                onClick={() => setBachelorOpened((open) => !open)}
-              >
-                Mehr...
-              </Button>
-
-              <Collapse
-                in={bachelorOpened}
-                sx={(theme) => ({ marginBlock: theme.spacing.sm })}
-              >
-                Abschlussarbeit:{" "}
-                <strong>
-                  Modulentwicklung für das CMS Contao - Eine Anwesenheitsliste
-                  für Kalender-Events
-                </strong>
-              </Collapse>
-            </Timeline.Item>
-            <Timeline.Item title="git rebase feature/pixel-panda">
-              <Text color="dimmed" size="sm">
-                Co-Selbstständigkeit <br />
-                Pixel Panda
-              </Text>
-              <Text size="xs" style={{ marginTop: 4 }}>
-                2012 - 2014
-              </Text>
-            </Timeline.Item>
-            <Timeline.Item title="git rebase feature/master">
-              <Text color="dimmed" size="sm">
-                M.A. Medienkonzeption <br />
-                FH Kiel
-              </Text>
-              <Text size="xs" style={{ marginTop: 4 }}>
-                2014 - 2017
-              </Text>
-            </Timeline.Item>
-            <Timeline.Item title="git rebase feature/buck-medien">
-              <Text color="dimmed" size="sm">
-                Solo-Selbstständigkeit <br />
-                Buck Medien
-              </Text>
-              <Text size="xs" style={{ marginTop: 4 }}>
-                2014 - heute
-              </Text>
-            </Timeline.Item>
-            <Timeline.Item title="git rebase feature/ppi-media">
-              <Text color="dimmed" size="sm">
-                Softwareentwickler ppi Media GmbH
-              </Text>
-              <Text size="xs" style={{ marginTop: 4 }}>
-                2018 - 2019
-              </Text>
-            </Timeline.Item>
-            <Timeline.Item title="git rebase feature/weluse">
-              <Text color="dimmed" size="sm">
-                Softwareentwickler weluse GmbH
-              </Text>
-              <Text size="xs" style={{ marginTop: 4 }}>
-                2019 - heute
-              </Text>
-            </Timeline.Item>
-
-            <Timeline.Item
-              title="git rebase feature/webprojekt"
-              lineVariant="dashed"
-            >
-              <Text color="dimmed" size="sm">
-                Kursleitung, <br />
-                opencampus
-              </Text>
-              <Text size="xs" style={{ marginTop: 4 }}>
-                2020 - heute
-              </Text>
-            </Timeline.Item>
-            <Timeline.Item title="git switch -c feature/future">
-              <Text color="dimmed" size="sm">
-                Softwareentwickler ???
-              </Text>
-              <Text size="xs" style={{ marginTop: 4 }}>
-                ???
-              </Text>
-            </Timeline.Item>
-          </Timeline>
+          <TimeLine items={cv} forHire={Boolean(options?.forHire)} />
         </Container>
       </Container>
     </>
@@ -238,3 +92,18 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps<{
+  cv: CVResult;
+  options: OptionsResult;
+}> = async (_context) => {
+  const options = await client.fetch<OptionsResult>(optionsQuery);
+  const cv = await client.fetch<CVResult>(cvQuery);
+
+  return {
+    props: {
+      options,
+      cv,
+    },
+  };
+};
