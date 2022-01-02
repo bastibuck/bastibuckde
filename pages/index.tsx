@@ -16,7 +16,6 @@ const Home = ({
   cv,
   options,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log("🚀 ~ file: index.tsx ~ line 19 ~ options", options);
   return (
     <>
       <Head>
