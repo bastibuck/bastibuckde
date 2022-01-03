@@ -12,12 +12,13 @@ const Datenschutz: NextPage = () => {
         <meta name="description" content="Datenschutzerklärung" />
       </Head>
 
-      <Container>
+      <Container
+        sx={(theme) => ({
+          background:
+            theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+        })}
+      >
         <div>
-          <Link href="/" passHref>
-            <Anchor>&larr; zurück</Anchor>
-          </Link>
-
           <h1>Daten&shy;schutz&shy;erklärung</h1>
 
           <h3>Datenschutz</h3>

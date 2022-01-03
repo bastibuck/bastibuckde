@@ -26,7 +26,13 @@ const Home = ({
         />
       </Head>
 
-      <Center sx={{ height: "100vh" }}>
+      <Center
+        sx={(theme) => ({
+          height: "100vh",
+          background:
+            theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+        })}
+      >
         <Container fluid>
           <div
             style={{

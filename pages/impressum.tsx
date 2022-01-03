@@ -12,12 +12,14 @@ const Impressum: NextPage = () => {
         <meta name="description" content="Impressum" />
       </Head>
 
-      <Container>
+      <Container
+        sx={(theme) => ({
+          background:
+            theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+          overflow: "hidden",
+        })}
+      >
         <div>
-          <Link href="/" passHref>
-            <Anchor>&larr; zurück</Anchor>
-          </Link>
-
           <h1>Impressum</h1>
 
           <h3>Angaben gemäß § 5 TMG:</h3>
@@ -57,7 +59,13 @@ const Impressum: NextPage = () => {
         </div>
       </Container>
 
-      <Container>
+      <Container
+        sx={(theme) => ({
+          background:
+            theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+          overflow: "hidden",
+        })}
+      >
         <div>
           <h3>Haftungsausschluss (Disclaimer)</h3>
           <p>
