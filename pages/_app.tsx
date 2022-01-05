@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const isHomeRoute = router.route === "/";
 
-  const FOOTER_HEIGHT = 246;
+  const FOOTER_HEIGHT = 268;
 
   const socialIcons = [
     {
