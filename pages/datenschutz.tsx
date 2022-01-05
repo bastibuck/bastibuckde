@@ -1,27 +1,25 @@
+import React from "react";
+import { Anchor, Container } from "@mantine/core";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import styles from "../styles/Home.module.css";
-
 const Datenschutz: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Basti Buck</title>
-        <meta
-          name="description"
-          content="Basti Buck ist Web-/Softwareentwickler aus Kiel"
-        />
+        <title>Datenschutz | Basti Buck</title>
+        <meta name="description" content="Datenschutzerklärung" />
       </Head>
 
-      <section className={`${styles.section} ${styles.left}`}>
-        <div className={styles.centeredBox}>
-          <Link href="/">
-            <a className={styles.back}>&larr; zurück</a>
-          </Link>
-
-          <h1 className={styles.title}>Daten&shy;schutz&shy;erklärung</h1>
+      <Container
+        sx={(theme) => ({
+          background:
+            theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+        })}
+      >
+        <div>
+          <h1>Daten&shy;schutz&shy;erklärung</h1>
 
           <h3>Datenschutz</h3>
 
@@ -76,7 +74,7 @@ const Datenschutz: NextPage = () => {
             Nutzung bekannt werden.
           </p>
         </div>
-      </section>
+      </Container>
     </div>
   );
 };
