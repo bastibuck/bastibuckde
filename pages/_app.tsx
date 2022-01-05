@@ -12,7 +12,7 @@ import {
   Title,
   Text,
   Button,
-  Box,
+  Divider,
 } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -156,15 +156,12 @@ function MyApp({ Component, pageProps }: AppProps) {
             </Container>
           </Group>
 
+          <Divider />
+
           <Group
             position="apart"
             sx={(theme) => ({
               paddingTop: theme.spacing.sm,
-              borderTop: `1px solid ${
-                theme.colorScheme === "dark"
-                  ? theme.colors.gray[7]
-                  : theme.colors.gray[4]
-              }`,
             })}
           >
             <Group spacing={0}>
