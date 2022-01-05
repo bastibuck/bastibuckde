@@ -4,7 +4,16 @@ import Head from "next/head";
 import Image from "next/image";
 
 import basti from "../assets/bastibuck.jpg";
-import { Center, Container, Title } from "@mantine/core";
+import {
+  Center,
+  Container,
+  Title,
+  Badge,
+  Group,
+  Paper,
+  Blockquote,
+  Tooltip,
+} from "@mantine/core";
 import { cvQuery, CVResult } from "../queries/cv";
 import { client } from "../queries/client";
 
@@ -16,6 +25,64 @@ const Home = ({
   cv,
   options,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const skills = [
+    {
+      text: "TypeScript",
+      from: "cyan",
+      to: "indigo",
+      tooltip: "Type-safety 😍",
+    },
+    { text: "JavaScript", from: "yellow", to: "red" },
+    { text: "CSS", from: "cyan", to: "indigo" },
+    { text: "HTML", from: "orange", to: "red" },
+
+    {
+      text: "NextJS",
+      from: "green",
+      to: "blue",
+      tooltip: "Definitiv meine aktuelle Go-To-Solution für ein Projekt :) ",
+    },
+    {
+      text: "React",
+      from: "blue",
+      to: "indigo",
+      tooltip:
+        "Unter Verwendung vieler bekannter Erweiterungen wie react-query, formik, Framer motion, etc.",
+    },
+    { text: "Vue", from: "green", to: "blue" },
+
+    {
+      text: "Testing",
+      from: "red",
+      to: "orange",
+      tooltip:
+        "Automatisiertes Software-Testing unter anderem mit Jest, Testing-Library und Cypress",
+    },
+
+    { text: "REST", from: "lime", to: "teal" },
+    {
+      text: "GraphQL",
+      from: "pink",
+      to: "grape",
+      tooltip: "'Schema first' begeistert und überzeugt mich",
+    },
+    { text: "NodeJS", from: "indigo", to: "green" },
+    { text: "Sanity.io", from: "indigo", to: "green" },
+
+    {
+      text: "Agile Softwareentwicklung (Scrum)",
+      from: "grape",
+      to: "pink",
+    },
+    {
+      text: "Tooling",
+      from: "lime",
+      to: "teal",
+      tooltip:
+        "eslint, prettier, husky, lint-staged, codegen, VS-Code Snippets, ... - Das Entwickler-Leben einfacher zu machen, liegt mir am Herzen",
+    },
+  ];
+
   return (
     <>
       <Head>
@@ -73,6 +140,67 @@ const Home = ({
           </Title>
         </Container>
       </Center>
+
+      <Container
+        fluid
+        sx={(theme) => ({
+          padding: theme.spacing.xl,
+          background:
+            theme.colorScheme === "dark"
+              ? theme.colors["dark"][6]
+              : theme.fn.lighten(theme.colors["cyan"][1], 0.5),
+        })}
+      >
+        <Container size={450}>
+          <Title order={3} align="center">
+            Fähigkeiten
+          </Title>
+        </Container>
+        <Container size={700}>
+          <Group
+            position="center"
+            sx={(theme) => ({ marginBlock: theme.spacing.md })}
+          >
+            {skills.map(({ text, from, to, tooltip }) => (
+              <React.Fragment key={text}>
+                {tooltip ? (
+                  <Tooltip
+                    label={tooltip}
+                    wrapLines
+                    width={200}
+                    withArrow
+                    arrowSize={6}
+                  >
+                    <Badge variant="gradient" gradient={{ from, to }} size="lg">
+                      {text}
+                    </Badge>
+                  </Tooltip>
+                ) : (
+                  <Badge variant="gradient" gradient={{ from, to }} size="lg">
+                    {text}
+                  </Badge>
+                )}
+              </React.Fragment>
+            ))}
+          </Group>
+        </Container>
+      </Container>
+
+      <Container fluid>
+        <Paper padding={40}>
+          <Center>
+            <Blockquote
+              color="cyan"
+              cite="– Steve Jobs"
+              styles={(theme) => ({
+                inner: { fontSize: theme.fontSizes.lg },
+              })}
+            >
+              Stay hungry. Stay foolish.
+            </Blockquote>
+          </Center>
+        </Paper>
+      </Container>
 
       <Container
         fluid
