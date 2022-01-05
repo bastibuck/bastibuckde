@@ -113,7 +113,7 @@ const Home = ({
                     wrapLines
                     width={200}
                     withArrow
-                    arrowSize={6}
+                    arrowSize={3}
                   >
                     <Badge variant="gradient" gradient={{ from, to }} size="lg">
                       {title}
