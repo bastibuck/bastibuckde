@@ -2,8 +2,6 @@ import React from "react";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
-
-import basti from "../assets/bastibuck.jpg";
 import {
   Center,
   Container,
@@ -16,73 +14,19 @@ import {
 } from "@mantine/core";
 import { cvQuery, CVResult } from "../queries/cv";
 import { client } from "../queries/client";
+import { optionsQuery, OptionsResult } from "../queries/options";
+import { Skill, skillsQuery, SkillsResult } from "../queries/skills";
 
 import TypeWriter from "../components/TypeWriter";
 import TimeLine from "../components/TimeLine";
-import { optionsQuery, OptionsResult } from "../queries/options";
+
+import basti from "../assets/bastibuck.jpg";
 
 const Home = ({
   cv,
   options,
+  skills,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const skills = [
-    {
-      text: "TypeScript",
-      from: "cyan",
-      to: "indigo",
-      tooltip: "Type-safety 😍",
-    },
-    { text: "JavaScript", from: "yellow", to: "red" },
-    { text: "CSS", from: "cyan", to: "indigo" },
-    { text: "HTML", from: "orange", to: "red" },
-
-    {
-      text: "NextJS",
-      from: "green",
-      to: "blue",
-      tooltip: "Definitiv meine aktuelle Go-To-Solution für ein Projekt :) ",
-    },
-    {
-      text: "React",
-      from: "blue",
-      to: "indigo",
-      tooltip:
-        "Unter Verwendung vieler bekannter Erweiterungen wie react-query, formik, Framer motion, etc.",
-    },
-    { text: "Vue", from: "green", to: "blue" },
-
-    {
-      text: "Testing",
-      from: "red",
-      to: "orange",
-      tooltip:
-        "Automatisiertes Software-Testing unter anderem mit Jest, Testing-Library und Cypress",
-    },
-
-    { text: "REST", from: "lime", to: "teal" },
-    {
-      text: "GraphQL",
-      from: "pink",
-      to: "grape",
-      tooltip: "'Schema first' begeistert und überzeugt mich",
-    },
-    { text: "NodeJS", from: "indigo", to: "green" },
-    { text: "Sanity.io", from: "indigo", to: "green" },
-
-    {
-      text: "Agile Softwareentwicklung (Scrum)",
-      from: "grape",
-      to: "pink",
-    },
-    {
-      text: "Tooling",
-      from: "lime",
-      to: "teal",
-      tooltip:
-        "eslint, prettier, husky, lint-staged, codegen, VS-Code Snippets, ... - Das Entwickler-Leben einfacher zu machen, liegt mir am Herzen",
-    },
-  ];
-
   return (
     <>
       <Head>
@@ -156,28 +100,28 @@ const Home = ({
             Fähigkeiten
           </Title>
         </Container>
-        <Container size={700}>
+        <Container size={620}>
           <Group
             position="center"
             sx={(theme) => ({ marginBlock: theme.spacing.md })}
           >
-            {skills.map(({ text, from, to, tooltip }) => (
-              <React.Fragment key={text}>
-                {tooltip ? (
+            {skills.map(({ title, from, to, description }) => (
+              <React.Fragment key={title}>
+                {description ? (
                   <Tooltip
-                    label={tooltip}
+                    label={description}
                     wrapLines
                     width={200}
                     withArrow
                     arrowSize={6}
                   >
                     <Badge variant="gradient" gradient={{ from, to }} size="lg">
-                      {text}
+                      {title}
                     </Badge>
                   </Tooltip>
                 ) : (
                   <Badge variant="gradient" gradient={{ from, to }} size="lg">
-                    {text}
+                    {title}
                   </Badge>
                 )}
               </React.Fragment>
@@ -229,14 +173,40 @@ export default Home;
 export const getStaticProps: GetStaticProps<{
   cv: CVResult;
   options: OptionsResult;
+  skills: Array<Skill & { from: string; to: string }>;
 }> = async (_context) => {
   const options = await client.fetch<OptionsResult>(optionsQuery);
   const cv = await client.fetch<CVResult>(cvQuery);
+  const skills = await client.fetch<SkillsResult>(skillsQuery);
+
+  const skillsMap: { [skillTitle: string]: { from: string; to: string } } = {
+    TypeScript: { from: "cyan", to: "indigo" },
+    CSS: { from: "cyan", to: "indigo" },
+    HTML: { from: "orange", to: "red" },
+    "Next.js": { from: "green", to: "blue" },
+    React: { from: "blue", to: "indigo" },
+    Vue: { from: "green", to: "blue" },
+    Testing: { from: "red", to: "orange" },
+    REST: { from: "lime", to: "teal" },
+    GraphQL: { from: "pink", to: "grape" },
+    "Node.js": { from: "indigo", to: "green" },
+    "Sanity.io": { from: "indigo", to: "red" },
+    Tooling: { from: "lime", to: "teal" },
+    "Agile Softwareentwicklung (Scrum)": { from: "grape", to: "pink" },
+  };
+
+  const fallbackGradient = { from: "teal", to: "lime" };
+
+  const mappedSkills = skills.map((skill) => ({
+    ...skill,
+    ...(skillsMap[skill.title] || fallbackGradient),
+  }));
 
   return {
     props: {
       options,
       cv,
+      skills: mappedSkills,
     },
   };
 };
