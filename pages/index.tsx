@@ -81,7 +81,7 @@ const Home = ({
           background:
             theme.colorScheme === "dark"
               ? theme.colors["dark"][6]
-              : theme.colors["cyan"][1],
+              : theme.fn.lighten(theme.colors["cyan"][1], 0.5),
         })}
       >
         <Container size={450}>
