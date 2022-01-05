@@ -12,6 +12,7 @@ import {
   Title,
   Text,
   Button,
+  Box,
 } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -29,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const isHomeRoute = router.route === "/";
 
-  const FOOTER_HEIGHT = 291;
+  const FOOTER_HEIGHT = 246;
 
   const socialIcons = [
     {
@@ -116,7 +117,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           })}
         >
           <Group position="center">
-            <Container size={300}>
+            <Container size={450}>
               <Text
                 sx={(theme) => ({
                   fontSize: theme.fontSizes.lg,
@@ -147,54 +148,16 @@ function MyApp({ Component, pageProps }: AppProps) {
                 variant="gradient"
                 gradient={{ from: "indigo", to: "cyan" }}
                 sx={(theme) => ({
-                  marginBottom: theme.spacing.xs,
+                  marginBottom: theme.spacing.xl,
                 })}
               >
                 mail@bastibuck.de
               </Button>
-
-              <Group
-                sx={(theme) => ({
-                  marginBottom: theme.spacing.md,
-                })}
-                spacing={0}
-              >
-                {socialIcons.map((icon) => (
-                  <Button
-                    key={icon.url}
-                    component="a"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={icon.url}
-                    styles={(theme) => ({
-                      root: {
-                        backgroundColor: "transparent",
-                        border: 0,
-                        padding: `0 ${theme.spacing.sm}px`,
-                        color:
-                          theme.colorScheme === "dark"
-                            ? theme.colors.white
-                            : theme.colors.cyan[6],
-
-                        "&:hover": {
-                          backgroundColor: "none",
-                          backgroundImage:
-                            theme.colorScheme === "dark"
-                              ? `linear-gradient(45deg, ${theme.colors.indigo[6]} 0%, ${theme.colors.cyan[6]} 100%)`
-                              : `linear-gradient(45deg, ${theme.colors.indigo[1]} 0%, ${theme.colors.cyan[1]} 100%)`,
-                        },
-                      },
-                    })}
-                  >
-                    {icon.icon}
-                  </Button>
-                ))}
-              </Group>
             </Container>
           </Group>
 
           <Group
-            position="right"
+            position="apart"
             sx={(theme) => ({
               paddingTop: theme.spacing.sm,
               borderTop: `1px solid ${
@@ -204,16 +167,51 @@ function MyApp({ Component, pageProps }: AppProps) {
               }`,
             })}
           >
-            <Link href="/datenschutz" passHref>
-              <Anchor size="sm" color="dimmed">
-                Datenschutz
-              </Anchor>
-            </Link>
-            <Link href="/impressum" passHref>
-              <Anchor size="sm" color="dimmed">
-                Impressum
-              </Anchor>
-            </Link>
+            <Group spacing={0}>
+              {socialIcons.map((icon) => (
+                <Button
+                  key={icon.url}
+                  component="a"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={icon.url}
+                  styles={(theme) => ({
+                    root: {
+                      backgroundColor: "transparent",
+                      border: 0,
+                      padding: `0 ${theme.spacing.sm}px`,
+                      color:
+                        theme.colorScheme === "dark"
+                          ? theme.colors.white
+                          : theme.colors.cyan[6],
+
+                      "&:hover": {
+                        background: "none",
+                        color:
+                          theme.colorScheme === "dark"
+                            ? theme.colors.cyan[6]
+                            : theme.colors.cyan[2],
+                      },
+                    },
+                  })}
+                >
+                  {icon.icon}
+                </Button>
+              ))}
+            </Group>
+
+            <Group>
+              <Link href="/datenschutz" passHref>
+                <Anchor size="sm" color="dimmed">
+                  Datenschutz
+                </Anchor>
+              </Link>
+              <Link href="/impressum" passHref>
+                <Anchor size="sm" color="dimmed">
+                  Impressum
+                </Anchor>
+              </Link>
+            </Group>
           </Group>
         </Container>
       </AppShell>
