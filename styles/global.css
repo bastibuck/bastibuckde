@@ -1,0 +1,34 @@
+.intro::after {
+  content: "➝";
+  animation-duration: 2s;
+  animation-name: bounce;
+  animation-iteration-count: infinite;
+  animation-delay: 5s;
+  opacity: 0;
+  position: absolute;
+  bottom: 0.5rem;
+}
+
+@keyframes bounce {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) rotate(90deg);
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(0) rotate(90deg);
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) rotate(90deg);
+  }
+}

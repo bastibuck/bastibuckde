@@ -21,6 +21,11 @@ import Bulb from "../components/icons/Bulb";
 import Twitter from "../components/icons/Twitter";
 import GitHub from "../components/icons/GitHub";
 
+import "../styles/global.css";
+
+export const HEADER_HEIGHT = 50;
+const FOOTER_HEIGHT = 268;
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
 
@@ -29,8 +34,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
   const isHomeRoute = router.route === "/";
-
-  const FOOTER_HEIGHT = 268;
 
   const socialIcons = [
     {
@@ -62,7 +65,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         padding={0}
         fixed
         header={
-          <Header height={50} sx={{ border: "none" }}>
+          <Header height={HEADER_HEIGHT} sx={{ border: "none" }}>
             <Group
               position={isHomeRoute ? "right" : "apart"}
               sx={(theme) => ({

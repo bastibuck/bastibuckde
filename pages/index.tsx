@@ -21,6 +21,7 @@ import TypeWriter from "../components/TypeWriter";
 import TimeLine from "../components/TimeLine";
 
 import basti from "../assets/bastibuck.jpg";
+import { HEADER_HEIGHT } from "./_app";
 
 const Home = ({
   cv,
@@ -38,8 +39,10 @@ const Home = ({
       </Head>
 
       <Center
+        className="intro"
         sx={(theme) => ({
-          height: "100vh",
+          height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+          position: "relative",
           background:
             theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
         })}
