@@ -11,14 +11,17 @@ import {
   Paper,
   Blockquote,
   Tooltip,
+  SimpleGrid,
 } from "@mantine/core";
 import { cvQuery, CVResult } from "../queries/cv";
 import { client } from "../queries/client";
 import { optionsQuery, OptionsResult } from "../queries/options";
 import { Skill, skillsQuery, SkillsResult } from "../queries/skills";
+import { ProjectsResult, projectsQuery } from "../queries/projects";
 
 import TypeWriter from "../components/TypeWriter";
 import TimeLine from "../components/TimeLine";
+import ProjectCard from "../components/ProjectCard";
 
 import basti from "../assets/bastibuck.jpg";
 import { HEADER_HEIGHT } from "./_app";
@@ -27,6 +30,7 @@ const Home = ({
   cv,
   options,
   skills,
+  projects,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
@@ -50,7 +54,7 @@ const Home = ({
         <Container fluid>
           <div
             style={{
-              width: "clamp(250px, 50vw, 400px)",
+              width: "clamp(250px, 50vw, 350px)",
               aspectRatio: "1",
               borderRadius: "50%",
               overflow: "hidden",
@@ -149,6 +153,26 @@ const Home = ({
         </Paper>
       </Container>
 
+      {projects.length > 0 ? (
+        <Container fluid>
+          <Paper padding={"xl"}>
+            <Title order={3} align="center" mb={"xl"}>
+              Side Projects
+            </Title>
+
+            <SimpleGrid
+              breakpoints={[{ minWidth: "sm", cols: 3 }]}
+              spacing="md"
+              mb={"xl"}
+            >
+              {projects.map((project) => (
+                <ProjectCard key={project._id} project={project} />
+              ))}
+            </SimpleGrid>
+          </Paper>
+        </Container>
+      ) : null}
+
       <Container
         fluid
         sx={(theme) => ({
@@ -177,10 +201,12 @@ export const getStaticProps: GetStaticProps<{
   cv: CVResult;
   options: OptionsResult;
   skills: Array<Skill & { from: string; to: string }>;
+  projects: ProjectsResult;
 }> = async (_context) => {
   const options = await client.fetch<OptionsResult>(optionsQuery);
   const cv = await client.fetch<CVResult>(cvQuery);
   const skills = await client.fetch<SkillsResult>(skillsQuery);
+  const projects = await client.fetch<ProjectsResult>(projectsQuery);
 
   const skillsMap: { [skillTitle: string]: { from: string; to: string } } = {
     TypeScript: { from: "cyan", to: "indigo" },
@@ -210,6 +236,7 @@ export const getStaticProps: GetStaticProps<{
       options,
       cv,
       skills: mappedSkills,
+      projects,
     },
   };
 };
