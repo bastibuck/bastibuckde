@@ -10,12 +10,12 @@ const ProjectCard: React.FC<{
   project: Project;
 }> = ({ project: { title, description, image, href } }) => {
   return (
-    <Card shadow="lg" padding="md">
+    <Card shadow="md" padding="md" withBorder>
       <Card.Section mb="sm">
         <div
           style={{
             width: "100%",
-            height: 200,
+            height: 240,
             position: "relative",
           }}
         >

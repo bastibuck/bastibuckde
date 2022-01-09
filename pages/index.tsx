@@ -137,6 +137,27 @@ const Home = ({
         </Container>
       </Container>
 
+      {projects.length > 0 ? (
+        <Container fluid>
+          <Paper padding={"xl"}>
+            <Container size={1200}>
+              <Title order={3} align="center" mb={"xl"}>
+                Side Projects
+              </Title>
+
+              <SimpleGrid
+                breakpoints={[{ minWidth: "sm", cols: 3 }]}
+                spacing="md"
+              >
+                {projects.map((project) => (
+                  <ProjectCard key={project._id} project={project} />
+                ))}
+              </SimpleGrid>
+            </Container>
+          </Paper>
+        </Container>
+      ) : null}
+
       <Container fluid>
         <Paper padding={40}>
           <Center>
@@ -152,26 +173,6 @@ const Home = ({
           </Center>
         </Paper>
       </Container>
-
-      {projects.length > 0 ? (
-        <Container fluid>
-          <Paper padding={"xl"}>
-            <Title order={3} align="center" mb={"xl"}>
-              Side Projects
-            </Title>
-
-            <SimpleGrid
-              breakpoints={[{ minWidth: "sm", cols: 3 }]}
-              spacing="md"
-              mb={"xl"}
-            >
-              {projects.map((project) => (
-                <ProjectCard key={project._id} project={project} />
-              ))}
-            </SimpleGrid>
-          </Paper>
-        </Container>
-      ) : null}
 
       <Container
         fluid
