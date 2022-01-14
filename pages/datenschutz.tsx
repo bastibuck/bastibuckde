@@ -1,8 +1,7 @@
 import React from "react";
-import { Anchor, Container } from "@mantine/core";
+import { Container } from "@mantine/core";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 
 const Datenschutz: NextPage = () => {
   return (
@@ -13,12 +12,17 @@ const Datenschutz: NextPage = () => {
       </Head>
 
       <Container
+        fluid
         sx={(theme) => ({
           background:
             theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
         })}
       >
-        <div>
+        <Container
+          sx={(theme) => ({
+            paddingBlock: theme.spacing.xs,
+          })}
+        >
           <h1>Daten&shy;schutz&shy;erklärung</h1>
 
           <h3>Datenschutz</h3>
@@ -73,7 +77,7 @@ const Datenschutz: NextPage = () => {
             prüfen, wenn uns konkrete Anhaltspunkte für eine rechtswidrige
             Nutzung bekannt werden.
           </p>
-        </div>
+        </Container>
       </Container>
     </div>
   );
