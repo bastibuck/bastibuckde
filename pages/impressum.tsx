@@ -13,13 +13,18 @@ const Impressum: NextPage = () => {
       </Head>
 
       <Container
+        fluid
         sx={(theme) => ({
           background:
             theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
           overflow: "hidden",
         })}
       >
-        <div>
+        <Container
+          sx={(theme) => ({
+            paddingBlock: theme.spacing.xs,
+          })}
+        >
           <h1>Impressum</h1>
 
           <h3>Angaben gemäß § 5 TMG:</h3>
@@ -56,17 +61,22 @@ const Impressum: NextPage = () => {
               </Link>
             </em>
           </p>
-        </div>
+        </Container>
       </Container>
 
       <Container
+        fluid
         sx={(theme) => ({
           background:
             theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
           overflow: "hidden",
         })}
       >
-        <div>
+        <Container
+          sx={(theme) => ({
+            paddingBlock: theme.spacing.xs,
+          })}
+        >
           <h3>Haftungsausschluss (Disclaimer)</h3>
           <p>
             <strong>Haftung für Inhalte</strong>
@@ -126,7 +136,7 @@ const Impressum: NextPage = () => {
             wir um einen entsprechenden Hinweis. Bei Bekanntwerden von
             Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
           </p>
-        </div>
+        </Container>
       </Container>
     </div>
   );
