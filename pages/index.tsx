@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -13,6 +13,8 @@ import {
   Tooltip,
   SimpleGrid,
 } from "@mantine/core";
+import { useHover, useIntersection } from "@mantine/hooks";
+
 import { cvQuery, CVResult } from "../queries/cv";
 import { client } from "../queries/client";
 import { optionsQuery, OptionsResult } from "../queries/options";
@@ -32,6 +34,30 @@ const Home = ({
   skills,
   projects,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const [skillsInViewBefore, setSkillsInViewBefore] = useState(false);
+
+  const [intersectionRef, observer] = useIntersection({
+    threshold: 1,
+  });
+
+  const { hovered, ref: hoveredRef } = useHover();
+
+  // hide initial opened skill tooltip
+  useEffect(() => {
+    if (skillsInViewBefore === false && (observer?.isIntersecting || hovered)) {
+      if (observer?.isIntersecting) {
+        setTimeout(() => {
+          setSkillsInViewBefore(true);
+        }, 900);
+      }
+
+      if (hovered) {
+        setSkillsInViewBefore(true);
+      }
+    }
+    return () => {};
+  }, [skillsInViewBefore, observer?.isIntersecting, hovered]);
+
   return (
     <>
       <Head>
@@ -107,12 +133,13 @@ const Home = ({
             Fähigkeiten
           </Title>
         </Container>
-        <Container size={620}>
+        <Container size={620} ref={hoveredRef}>
           <Group
+            ref={intersectionRef}
             position="center"
             sx={(theme) => ({ marginBlock: theme.spacing.md })}
           >
-            {skills.map(({ title, from, to, description }) => (
+            {skills.map(({ title, from, to, description, opened }) => (
               <React.Fragment key={title}>
                 {description ? (
                   <Tooltip
@@ -121,6 +148,7 @@ const Home = ({
                     width={200}
                     withArrow
                     arrowSize={3}
+                    opened={skillsInViewBefore === false ? opened : undefined}
                   >
                     <Badge variant="gradient" gradient={{ from, to }} size="lg">
                       {title}
@@ -201,7 +229,7 @@ export default Home;
 export const getStaticProps: GetStaticProps<{
   cv: CVResult;
   options: OptionsResult;
-  skills: Array<Skill & { from: string; to: string }>;
+  skills: Array<Skill & { from: string; to: string; opened?: boolean }>;
   projects: ProjectsResult;
 }> = async (_context) => {
   const options = await client.fetch<OptionsResult>(optionsQuery);
@@ -209,14 +237,16 @@ export const getStaticProps: GetStaticProps<{
   const skills = await client.fetch<SkillsResult>(skillsQuery);
   const projects = await client.fetch<ProjectsResult>(projectsQuery);
 
-  const skillsMap: { [skillTitle: string]: { from: string; to: string } } = {
+  const skillsMap: {
+    [skillTitle: string]: { from: string; to: string; opened?: boolean };
+  } = {
     TypeScript: { from: "cyan", to: "indigo" },
     CSS: { from: "cyan", to: "indigo" },
     HTML: { from: "orange", to: "red" },
     "Next.js": { from: "green", to: "blue" },
     React: { from: "blue", to: "indigo" },
     Vue: { from: "green", to: "blue" },
-    Testing: { from: "red", to: "orange" },
+    Testing: { from: "red", to: "orange", opened: true },
     REST: { from: "lime", to: "teal" },
     GraphQL: { from: "pink", to: "grape" },
     "Node.js": { from: "indigo", to: "green" },
