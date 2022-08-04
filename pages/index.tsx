@@ -33,6 +33,7 @@ const Home = ({
   options,
   skills,
   projects,
+  locale,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [skillsInViewBefore, setSkillsInViewBefore] = useState(false);
 
@@ -58,13 +59,19 @@ const Home = ({
     return () => {};
   }, [skillsInViewBefore, observer?.isIntersecting, hovered]);
 
+  const isEnglish = locale === "en";
+
   return (
     <>
       <Head>
         <title>Basti Buck</title>
         <meta
           name="description"
-          content="Basti Buck ist Web-/Softwareentwickler aus Kiel"
+          content={
+            isEnglish
+              ? "Basti Buck is a web/software developer from Kiel, Germany"
+              : "Basti Buck ist Web-/Softwareentwickler aus Kiel"
+          }
         />
       </Head>
 
@@ -91,7 +98,11 @@ const Home = ({
           >
             <Image
               src={basti}
-              alt="Portraitfoto Basti Buck"
+              alt={
+                isEnglish
+                  ? "Portrait picture of Basti Buck"
+                  : "Portraitfoto Basti Buck"
+              }
               layout="fill"
               objectFit="cover"
               placeholder="blur"
@@ -130,7 +141,7 @@ const Home = ({
       >
         <Container size={450}>
           <Title order={3} align="center">
-            Fähigkeiten
+            {isEnglish ? "Skills" : "Fähigkeiten"}
           </Title>
         </Container>
         <Container size={620} ref={hoveredRef}>
@@ -214,10 +225,14 @@ const Home = ({
       >
         <Container size={450}>
           <Title order={3} sx={(theme) => ({ marginBottom: theme.spacing.md })}>
-            Lebenslauf
+            {isEnglish ? "CV" : "Lebenslauf"}
           </Title>
 
-          <TimeLine items={cv} forHire={Boolean(options?.forHire)} />
+          <TimeLine
+            items={cv}
+            forHire={Boolean(options?.forHire)}
+            isEnglish={isEnglish}
+          />
         </Container>
       </Container>
     </>
@@ -231,7 +246,8 @@ export const getStaticProps: GetStaticProps<{
   options: OptionsResult;
   skills: Array<Skill & { from: string; to: string; opened?: boolean }>;
   projects: ProjectsResult;
-}> = async (_context) => {
+  locale: string;
+}> = async ({ locale = "de" }) => {
   const options = await client.fetch<OptionsResult>(optionsQuery);
   const cv = await client.fetch<CVResult>(cvQuery);
   const skills = await client.fetch<SkillsResult>(skillsQuery);
@@ -253,6 +269,7 @@ export const getStaticProps: GetStaticProps<{
     "Sanity.io": { from: "indigo", to: "red" },
     Tooling: { from: "lime", to: "teal" },
     "Agile Softwareentwicklung (Scrum)": { from: "grape", to: "pink" },
+    "Agile scrum": { from: "grape", to: "pink" },
   };
 
   const fallbackGradient = { from: "teal", to: "lime" };
@@ -268,6 +285,7 @@ export const getStaticProps: GetStaticProps<{
       cv,
       skills: mappedSkills,
       projects,
+      locale,
     },
   };
 };
