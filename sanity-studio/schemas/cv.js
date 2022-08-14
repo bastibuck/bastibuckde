@@ -24,7 +24,7 @@ const cv = {
     {
       title: "Title",
       name: "title",
-      type: "string",
+      type: "i18nString",
       validation: (Rule) => Rule.required(),
     },
     {
@@ -37,7 +37,7 @@ const cv = {
     {
       title: "Description",
       name: "description",
-      type: "text",
+      type: "i18nText",
       validation: (Rule) => Rule.required(),
     },
     {
@@ -45,6 +45,11 @@ const cv = {
       name: "details",
       type: "array",
       of: [{ type: "block" }],
+    },
+    {
+      title: "Details",
+      name: "detailsI18n",
+      type: "i18nArrayBlock",
     },
   ],
   orderings: [
@@ -59,6 +64,11 @@ const cv = {
       by: [{ field: "from", direction: "asc" }],
     },
   ],
+  preview: {
+    select: {
+      title: "title.de",
+    },
+  },
 };
 
 export default cv;

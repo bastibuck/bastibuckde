@@ -12,9 +12,9 @@ const options = {
     },
     {
       title: "TypeWriter words",
-      name: "typewriterWords",
+      name: "professions",
       type: "array",
-      of: [{ type: "string" }],
+      of: [{ type: "i18nString" }],
       validation: (Rule) => Rule.required(),
     },
     {

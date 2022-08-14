@@ -7,20 +7,13 @@ const projects = {
     {
       title: "Title",
       name: "title",
-      type: "string",
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      title: "Slug",
-      name: "slug",
-      type: "slug",
-      options: { source: "title" },
+      type: "i18nString",
       validation: (Rule) => Rule.required(),
     },
     {
       title: "Description",
       name: "description",
-      type: "text",
+      type: "i18nText",
       validation: (Rule) => Rule.required(),
     },
     {
@@ -29,8 +22,8 @@ const projects = {
       type: "image",
       fields: [
         {
-          name: "alt",
-          type: "string",
+          name: "alternativText",
+          type: "i18nString",
           title: "Alt-Text",
           options: {
             isHighlighted: true,
@@ -52,6 +45,7 @@ const projects = {
       hidden: true,
     },
   ],
+
   orderings: [
     {
       title: "Order",
@@ -59,6 +53,12 @@ const projects = {
       by: [{ field: "order", direction: "asc" }],
     },
   ],
+
+  preview: {
+    select: {
+      title: "title.de",
+    },
+  },
 };
 
 export default projects;

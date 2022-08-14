@@ -210,12 +210,12 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Group>
               <Link href="/datenschutz" passHref>
                 <Anchor size="sm" color="dimmed">
-                  Datenschutz
+                  {isEnglish ? "Privacy" : "Datenschutz"}
                 </Anchor>
               </Link>
               <Link href="/impressum" passHref>
                 <Anchor size="sm" color="dimmed">
-                  Impressum
+                  {isEnglish ? "Imprint" : "Impressum"}
                 </Anchor>
               </Link>
             </Group>

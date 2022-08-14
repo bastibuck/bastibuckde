@@ -248,10 +248,12 @@ export const getStaticProps: GetStaticProps<{
   projects: ProjectsResult;
   locale: string;
 }> = async ({ locale = "de" }) => {
-  const options = await client.fetch<OptionsResult>(optionsQuery);
-  const cv = await client.fetch<CVResult>(cvQuery);
-  const skills = await client.fetch<SkillsResult>(skillsQuery);
-  const projects = await client.fetch<ProjectsResult>(projectsQuery);
+  const options = await client.fetch<OptionsResult>(optionsQuery, { locale });
+  const cv = await client.fetch<CVResult>(cvQuery, { locale });
+  const skills = await client.fetch<SkillsResult>(skillsQuery, { locale });
+  const projects = await client.fetch<ProjectsResult>(projectsQuery, {
+    locale,
+  });
 
   const skillsMap: {
     [skillTitle: string]: { from: string; to: string; opened?: boolean };
@@ -261,7 +263,7 @@ export const getStaticProps: GetStaticProps<{
     HTML: { from: "orange", to: "red" },
     "Next.js": { from: "green", to: "blue" },
     React: { from: "blue", to: "indigo" },
-    Vue: { from: "green", to: "blue" },
+    "Headless CMS": { from: "green", to: "blue" },
     Testing: { from: "red", to: "orange", opened: true },
     REST: { from: "lime", to: "teal" },
     GraphQL: { from: "pink", to: "grape" },
@@ -269,7 +271,7 @@ export const getStaticProps: GetStaticProps<{
     "Sanity.io": { from: "indigo", to: "red" },
     Tooling: { from: "lime", to: "teal" },
     "Agile Softwareentwicklung (Scrum)": { from: "grape", to: "pink" },
-    "Agile scrum": { from: "grape", to: "pink" },
+    "Agile software development (Scrum)": { from: "grape", to: "pink" },
   };
 
   const fallbackGradient = { from: "teal", to: "lime" };

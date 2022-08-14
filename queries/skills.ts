@@ -11,8 +11,8 @@ export const skillsQuery = `
     _type == "skills"
    ] {
     _id,
-   title,
-   description,
+   "title": coalesce(title[$locale], title.de),
+   "description": coalesce(description[$locale], description.de),
    order
   } | order(order)
 `;

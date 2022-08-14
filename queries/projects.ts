@@ -19,12 +19,12 @@ export const projectsQuery = `
     _type == "project"
    ] {
     _id,
-    title,
-    description,
+    "title": coalesce(title[$locale], title.de),
+    "description": coalesce(description[$locale], description.de),
     "image": {
         "imageUrl": image.asset->url, 
         "blurredUrl": image.asset->metadata.lqip, 
-        "alt": image.alt
+        "alt": coalesce(image.alternativText[$locale], image.alternativText.de),
     },
     href,
     order,
