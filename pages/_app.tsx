@@ -46,6 +46,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     },
   ];
 
+  const isEnglish = pageProps.locale === "en";
+
   return (
     <MantineProvider
       withGlobalStyles
@@ -129,7 +131,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     theme.colorScheme === "dark" ? theme.white : theme.black,
                 })}
               >
-                Sag Hallo 👋
+                {isEnglish ? "Say hello" : "Sag Hallo"} 👋
               </Text>
               <Text
                 sx={(theme) => ({
@@ -141,8 +143,13 @@ function MyApp({ Component, pageProps }: AppProps) {
                 })}
                 size="sm"
               >
-                Willst du mit mir in Kontakt treten?
-                <br /> Schreib mir einfach, ich freue mich auf deine Nachricht
+                {isEnglish
+                  ? "Do you want to get in touch?"
+                  : "Willst du mit mir in Kontakt treten?"}
+                <br />{" "}
+                {isEnglish
+                  ? "Just shoot me a message. Looking forward for it"
+                  : "Schreib mir einfach, ich freue mich auf deine Nachricht"}
               </Text>
 
               <Button
@@ -203,12 +210,12 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Group>
               <Link href="/datenschutz" passHref>
                 <Anchor size="sm" color="dimmed">
-                  Datenschutz
+                  {isEnglish ? "Privacy" : "Datenschutz"}
                 </Anchor>
               </Link>
               <Link href="/impressum" passHref>
                 <Anchor size="sm" color="dimmed">
-                  Impressum
+                  {isEnglish ? "Imprint" : "Impressum"}
                 </Anchor>
               </Link>
             </Group>

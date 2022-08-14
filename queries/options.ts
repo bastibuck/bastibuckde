@@ -9,6 +9,6 @@ export const optionsQuery = `
    ] {
     _id,
     forHire,
-    typewriterWords
+    "typewriterWords":  professions[][$locale]
   }[0]
 `;

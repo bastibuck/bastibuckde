@@ -7,13 +7,13 @@ const skills = {
     {
       title: "Title",
       name: "title",
-      type: "string",
+      type: "i18nString",
       validation: (Rule) => Rule.required(),
     },
     {
       title: "Description",
       name: "description",
-      type: "text",
+      type: "i18nText",
     },
     {
       name: "order",
@@ -30,6 +30,12 @@ const skills = {
       by: [{ field: "order", direction: "asc" }],
     },
   ],
+
+  preview: {
+    select: {
+      title: "title.de",
+    },
+  },
 };
 
 export default skills;

@@ -17,7 +17,7 @@ export const cvQuery = `
     from,
     to,
     "slug":slug.current,
-    description,
-    details
+    "description": coalesce(description[$locale], description.de),
+    "details": detailsI18n[$locale]
   } | order(from)
 `;

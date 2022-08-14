@@ -11,15 +11,16 @@ import BlockContent from "@sanity/block-content-to-react";
 
 import { CV } from "../queries/cv";
 
-const TimeLine: React.FC<{ items: CV[]; forHire: boolean }> = ({
-  items,
-  forHire,
-}) => {
+const TimeLine: React.FC<{
+  items: CV[];
+  forHire: boolean;
+  isEnglish: boolean;
+}> = ({ items, forHire, isEnglish }) => {
   return (
     <Timeline active={items.length} bulletSize={24} lineWidth={2}>
       <Timeline.Item title="git switch -c basti/buck">
         <Text color="dimmed" size="sm">
-          Geburt
+          {isEnglish ? "Birth" : "Geburt"}
         </Text>
         <Text size="xs" style={{ marginTop: 4 }}>
           15.12.1989
@@ -32,14 +33,14 @@ const TimeLine: React.FC<{ items: CV[]; forHire: boolean }> = ({
           title={`git rebase feature/${item.slug}`}
           lineVariant={forHire && items.length === idx + 1 ? "dashed" : "solid"}
         >
-          <TimeLineItemContent item={item} />
+          <TimeLineItemContent item={item} isEnglish={isEnglish} />
         </Timeline.Item>
       ))}
 
       {forHire ? (
         <Timeline.Item title="git switch -c feature/future">
           <Text color="dimmed" size="sm">
-            Softwareentwickler ???
+            {isEnglish ? "Software developer" : "Softwareentwickler"} ???
           </Text>
           <Text size="xs" style={{ marginTop: 4 }}>
             ???
@@ -50,7 +51,10 @@ const TimeLine: React.FC<{ items: CV[]; forHire: boolean }> = ({
   );
 };
 
-const TimeLineItemContent: React.FC<{ item: CV }> = ({ item }) => {
+const TimeLineItemContent: React.FC<{ item: CV; isEnglish: boolean }> = ({
+  item,
+  isEnglish,
+}) => {
   const [open, setOpen] = useState(false);
 
   const from = new Date(item.from).getFullYear();
@@ -78,7 +82,13 @@ const TimeLineItemContent: React.FC<{ item: CV }> = ({ item }) => {
             compact
             onClick={() => setOpen((open) => !open)}
           >
-            {open ? "Weniger" : "Mehr..."}
+            {open
+              ? isEnglish
+                ? "Less"
+                : "Weniger"
+              : isEnglish
+              ? "More"
+              : "Mehr..."}
           </Button>
           <Collapse
             in={open}
