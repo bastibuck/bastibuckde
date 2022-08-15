@@ -58,7 +58,12 @@ const TimeLineItemContent: React.FC<{ item: CV; isEnglish: boolean }> = ({
   const [open, setOpen] = useState(false);
 
   const from = new Date(item.from).getFullYear();
-  const to = item.to !== null ? new Date(item.to).getFullYear() : "heute";
+  const to =
+    item.to !== null
+      ? new Date(item.to).getFullYear()
+      : isEnglish
+      ? "today"
+      : "heute";
 
   return (
     <>
