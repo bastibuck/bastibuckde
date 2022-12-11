@@ -18,6 +18,9 @@ export const cvQuery = `
     to,
     "slug":slug.current,
     "description": coalesce(description[$locale], description.de),
-    "details": detailsI18n[$locale]
+    "details": select(
+      *[_type=="options"]{forHire}[0].forHire => detailsI18n[$locale],
+      null
+    )
   } | order(from)
 `;
