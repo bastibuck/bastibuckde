@@ -179,13 +179,13 @@ const Home = ({
       {projects.length > 0 ? (
         <Container fluid>
           <Paper padding={"xl"}>
-            <Container size={1200}>
+            <Container size={800}>
               <Title order={3} align="center" mb={"xl"}>
                 Side Projects
               </Title>
 
               <SimpleGrid
-                breakpoints={[{ minWidth: "sm", cols: 3 }]}
+                breakpoints={[{ minWidth: "sm", cols: 2 }]}
                 spacing="md"
               >
                 {projects.map((project) => (
@@ -262,9 +262,9 @@ export const getStaticProps: GetStaticProps<{
     CSS: { from: "cyan", to: "indigo" },
     HTML: { from: "orange", to: "red" },
     "Next.js": { from: "green", to: "blue" },
-    React: { from: "blue", to: "indigo" },
+    React: { from: "blue", to: "indigo", opened: true },
     "Headless CMS": { from: "green", to: "blue" },
-    Testing: { from: "red", to: "orange", opened: true },
+    Testing: { from: "red", to: "orange" },
     REST: { from: "lime", to: "teal" },
     GraphQL: { from: "pink", to: "grape" },
     "Node.js": { from: "indigo", to: "green" },

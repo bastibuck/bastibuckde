@@ -16,7 +16,7 @@ export type ProjectsResult = Array<Project>;
 
 export const projectsQuery = `
   *[
-    _type == "project"
+    _type == "project" && !(_id in path("drafts.**"))
    ] {
     _id,
     "title": coalesce(title[$locale], title.de),
