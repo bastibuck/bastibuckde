@@ -11,7 +11,7 @@ export type CVResult = Array<CV>;
 
 export const cvQuery = `
   *[
-    _type == "cv"
+    _type == "cv" && !(_id in path("drafts.**"))
    ] {
     _id,
     from,
