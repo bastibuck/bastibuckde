@@ -18,7 +18,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import Bulb from "../components/icons/Bulb";
-import Twitter from "../components/icons/Twitter";
+// import Twitter from "../components/icons/Twitter";
 import GitHub from "../components/icons/GitHub";
 
 import "../styles/global.css";
@@ -36,10 +36,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   const isHomeRoute = router.route === "/";
 
   const socialIcons = [
-    {
-      url: "https://twitter.com/bastibuck",
-      icon: <Twitter />,
-    },
+    // {
+    //   url: "https://twitter.com/bastibuck",
+    //   icon: <Twitter />,
+    // },
     {
       url: "https://github.com/bastibuck",
       icon: <GitHub />,
